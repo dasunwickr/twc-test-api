@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateContactDto } from './dto/create-contact.dto';
-import { UpdateContactDto } from './dto/update-contact.dto';
+import { ContactDto } from './dto/contact.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ContactService {
   constructor(private prisma: PrismaService) {}
-  create(createContactDto: CreateContactDto) {
-    return 'This action adds a new contact';
+  create(createContactDto: ContactDto) {
+    return this.prisma.contact.create({
+      data: createContactDto,
+    });
   }
 
   findAll() {
@@ -18,7 +19,7 @@ export class ContactService {
     return `This action returns a #${id} contact`;
   }
 
-  update(id: number, updateContactDto: UpdateContactDto) {
+  update(id: number, updateContactDto: ContactDto) {
     return `This action updates a #${id} contact`;
   }
 
