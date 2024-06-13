@@ -12,7 +12,7 @@ export class ContactDto {
 
   @IsString()
   @IsNotEmpty()
-  gender: Gender;
+  gender: string;
 
   @IsNotEmpty()
   @IsPhoneNumber('SL')
