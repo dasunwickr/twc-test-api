@@ -12,18 +12,25 @@ export class ContactService {
   }
 
   findAll() {
-    return `This action returns all contact`;
+    return this.prisma.contact.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} contact`;
+    return this.prisma.contact.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateContactDto: ContactDto) {
-    return `This action updates a #${id} contact`;
+    return this.prisma.contact.update({
+      where: { id },
+      data: updateContactDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} contact`;
+    return this.prisma.contact.delete({
+      where: { id },
+    });
   }
 }
