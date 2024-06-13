@@ -1,41 +1,17 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserDto } from './dto/user.dto';
+import { Controller, Get, Patch, Req, UseGuards } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { JwtGuard } from '../../src/auth/guard';
+import { GetUser } from 'src/auth/decorator';
 
-@Controller('user')
+//Guard the route
+@UseGuards(JwtGuard)
+@Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
-  @Post()
-  creaste(@Body() createUserDto: UserDto) {
-    return this.userService.create(createUserDto);
+  @Get('me')
+  getMe(@GetUser() user: User) {
+    return user;
   }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
-  }
+  @Patch()
+  editUser() {}
 }
