@@ -18,5 +18,6 @@ export class ContactDto {
   @IsPhoneNumber('SL')
   phone_number: string;
 
-  user: 
+  @IsNotEmpty()
+  user_id: number;
 }
