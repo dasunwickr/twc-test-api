@@ -6,10 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { ContactDto } from './dto/contact.dto';
+import { JwtGuard } from 'src/auth/guard';
 
+@UseGuards(JwtGuard)
 @Controller('contact')
 export class ContactController {
   constructor(private readonly contactService: ContactService) {}
@@ -20,8 +24,8 @@ export class ContactController {
   }
 
   @Get()
-  findAll() {
-    return this.contactService.findAll();
+  findAll(@Request() req) {
+    return this.contactService.findAll(req.user.id);
   }
 
   @Get(':id')
