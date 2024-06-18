@@ -12,6 +12,8 @@ import {
 import { ContactService } from './contact.service';
 import { ContactDto } from './dto/contact.dto';
 import { JwtGuard } from 'src/auth/guard';
+import { GetUser } from 'src/auth/decorator';
+import { User } from '@prisma/client';
 
 @UseGuards(JwtGuard)
 @Controller('contact')
@@ -19,7 +21,8 @@ export class ContactController {
   constructor(private readonly contactService: ContactService) {}
 
   @Post()
-  create(@Body() createContactDto: ContactDto) {
+  create(@Body() createContactDto: ContactDto, @GetUser() user: User) {
+    createContactDto.user_id = user.id;
     return this.contactService.create(createContactDto);
   }
 

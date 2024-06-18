@@ -15,7 +15,6 @@ export class ContactDto {
   gender: Gender;
 
   @IsNotEmpty()
-  @IsPhoneNumber('SL')
   phone_number: string;
 
   @IsNotEmpty()
