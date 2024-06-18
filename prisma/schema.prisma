@@ -30,6 +30,7 @@ model Contact {
   id           Int      @id @default(autoincrement())
   name         String
   gender       Gender
+  email        String
   phone_number String
   updated_at   DateTime @updatedAt
   created_at   DateTime @default(now())
