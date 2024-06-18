@@ -11,8 +11,12 @@ export class ContactService {
     });
   }
 
-  findAll() {
-    return this.prisma.contact.findMany();
+  findAll(user_id: number) {
+    return this.prisma.contact.findMany({
+      where: {
+        user_id,
+      },
+    });
   }
 
   findOne(id: number) {

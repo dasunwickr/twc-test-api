@@ -1,19 +1,15 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from './prisma/prisma.module';
-import { UserModule } from './user/user.module';
-import { ContactModule } from './contact/contact.module';
-import { PassportModule } from '@nestjs/passport';
+import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { ContactModule } from './contact/contact.module';
 
 @Module({
   imports: [
-    PrismaModule,
-    UserModule,
-    ContactModule,
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
+    PrismaModule,
+    ContactModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
