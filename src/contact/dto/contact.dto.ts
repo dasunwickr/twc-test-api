@@ -1,4 +1,4 @@
-import { Gender, User } from '@prisma/client';
+import type { Gender } from '@prisma/client';
 import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 
 export class ContactDto {
@@ -15,8 +15,8 @@ export class ContactDto {
   gender: Gender;
 
   @IsNotEmpty()
-  phone_number: string;
+  phoneNumber: string;
 
   @IsNotEmpty()
-  user_id: number;
+  userId: number;
 }

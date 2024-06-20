@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       },
     });
 
-    delete user.password_hash;
+    delete user.passwordHash;
     return user;
   }
 }

@@ -23,7 +23,7 @@ export class AuthService {
       const user = await this.prisma.user.create({
         data: {
           email: dto.email,
-          password_hash: hash,
+          passwordHash: hash,
         },
       });
 
@@ -50,15 +50,14 @@ export class AuthService {
 
     //compare the password
     const isPasswordValid = await argon2.verify(
-      user.password_hash,
+      user.passwordHash,
       dto.password,
     );
 
     //throw an error if the password is incorrect
     if (!isPasswordValid) {
-      if (!user) {
         throw new ForbiddenException('Invalid credentails.');
-      }
+      
     }
 
     //return the user
@@ -68,7 +67,7 @@ export class AuthService {
   async signToken(
     userId: number,
     email: string,
-  ): Promise<{ access_token: string }> {
+  ): Promise<{ accessToken: string }> {
     const payload = {
       sub: userId,
       email,
@@ -82,7 +81,7 @@ export class AuthService {
     });
 
     return {
-      access_token: token,
+      accessToken: token,
     };
   }
 }

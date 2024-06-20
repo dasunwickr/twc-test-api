@@ -22,7 +22,7 @@ export class ContactController {
 
   @Post()
   create(@Body() createContactDto: ContactDto, @GetUser() user: User) {
-    createContactDto.user_id = user.id;
+    createContactDto.userId = user.id;
     return this.contactService.create(createContactDto);
   }
 

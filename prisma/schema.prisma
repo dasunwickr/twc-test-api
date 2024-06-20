@@ -11,32 +11,32 @@ datasource db {
 
 //Genders 
 enum Gender {
-  MALE
-  FEMALE
+  Male
+  Female
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  email         String    @unique
-  password_hash String
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  contacts      Contact[]
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  contacts     Contact[]
 
   @@map("users")
 }
 
 model Contact {
-  id           Int      @id @default(autoincrement())
-  name         String
-  gender       Gender
-  email        String
-  phone_number String
-  updated_at   DateTime @updatedAt
-  created_at   DateTime @default(now())
-  user_id      Int
+  id          Int      @id @default(autoincrement())
+  name        String
+  gender      Gender
+  email       String
+  phoneNumber String
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  userId      Int
 
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("contacts")
 }
